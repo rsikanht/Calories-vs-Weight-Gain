@@ -1,0 +1,37 @@
+Calories_consumed-> predict weight gained using calories consumed
+
+getwd()
+setwd("C:/Users/Srikanth B V/Desktop/Data Science Assignments/Data Sets")
+cal <- read.csv("calories_consumed.csv")
+View(cal)
+library(psych)
+describe(cal)
+
+hist(cal$Weight.gained..grams.)
+hist(cal$Calories.Consumed)
+boxplot(cal$Weight.gained..grams., horizontal = T)
+boxplot(cal$Calories.Consumed, horizontal = T)
+plot(density(cal$Weight.gained..grams.))
+plot(density(cal$Calories.Consumed)
+plot(cal$Weight.gained..grams.,cal$Calories.Consumed)
+scatter.smooth(cal$Weight.gained..grams.,cal$Calories.Consumed)
+scatter.hist(cal$Weight.gained..grams.,cal$Calories.Consumed)
+
+cor(cal$Weight.gained..grams., cal$Calories.Consumed)
+# r = 0.95 proves strong positive correlation between variables
+# Calories consumed is the good input to predict weight gained.
+     
+reg_cal <- lm(log(cal$Weight.gained..grams.) ~ cal$Calories.Consumed)
+summary(reg_cal)
+
+confint(reg_cal, level = 0.95)
+
+# Predicting on the available values
+predict(reg_cal, interval = "predict")
+    
+2.83+0.0011*1500
+2.83+0.0011*3000
+
+# From the provided data set, the correlation value is 0.95 where both variables are strong and positively correlated.
+# Co-ef. are significant and co-ef.of Determination value. i.e R^2 is 0.90 which is good.
+# Hence model is best fit and Calories consumes is an appropriate input to determine Weight Gain.
